@@ -86,7 +86,7 @@
   --contrastLight:  #2e2e2a;
   --contrastLighter:#7a7a6e;
 
-  --accentClr:      #c9622a;
+  --accentClr:      #e07840;
   --accentClrDark:  #7a3a18;
   --accentFaint:    rgba(201,98,42,0.10);
 
@@ -237,6 +237,7 @@ summary:focus-visible {
   display: block;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   overflow: hidden;
+  margin-top: 20px;
 }
 
 /* ============================================================
