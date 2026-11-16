@@ -201,6 +201,7 @@ body {
   margin: 0 !important;
   line-height: 1.6;
   counter-reset: cat-counter;       /* compteur de "Sides" (A, B, C...) */
+  padding-top: 56px;
 }
 
 /* Focus clavier visible */
@@ -255,30 +256,42 @@ summary:focus-visible {
    ============================================================ */
 .sidebar {
   position: fixed;
-  background-color: var(--neutral);
-  inset: 0;
-  width: max-content;
+  inset: 0 0 auto 0;            /* collee en haut, sur toute la largeur */
+  width: auto;
+  height: 56px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
-  padding: 15px 10px;
+  align-items: center;
+  padding: 0 130px 0 16px;      /* 130px a droite = place pour le bouton de notifications */
+  background-color: var(--neutral);
+  border-right: none;
+  border-bottom: var(--border);
   z-index: 999;
-  border-right: var(--border);
 }
 
-.sidebar_top { display: flex; flex-direction: column; gap: 10px; }
-.sidebar_bottom { width: 45px; z-index: 999; display: flex; flex-direction: column; gap: 10px; }
+.sidebar_top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
 
-.sidebar_bottom > a {
-  padding: 5px 8px;
-  background: var(--neutralDarker);
-  border: var(--border);
-  border-radius: var(--radius-sm);
-  text-align: center;
-  font-family: var(--fontDisplay);
-  font-size: 16px;
-  color: var(--textColor);
-  letter-spacing: 1px;
+.sidebar_bottom {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  z-index: 999;
+}
+
+/* Le bouton clair/sombre prenait toute la largeur : on le remet a sa taille */
+.sidebar .color-scheme-toggle {
+  width: auto;
+  font-size: 20px;
+  line-height: 1.2;
+  padding: 3px 9px;
 }
 
 /* ============================================================
@@ -598,7 +611,7 @@ summary {
   gap: 10px;
   padding: 5px 12px;
   position: fixed;
-  z-index: 99;
+  z-index: 1000;                /* au-dessus de la barre (999) */
   top: 10px;
   right: 10px;
   height: 35px;
@@ -629,9 +642,9 @@ summary {
   width: var(--menuSize);
   position: fixed;
   z-index: 98;
-  top: 0;
-  height: 100%;
-  right: calc(var(--menuSize) * -1);
+  top: 56px;                    /* le panneau s'ouvre sous la barre */
+  height: calc(100% - 56px);
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -797,7 +810,7 @@ summary {
 
 .switcheroo__squircles {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   margin: 0;
   padding: 0;
@@ -873,10 +886,10 @@ summary {
   opacity: 0;
   transition: opacity 64ms var(--ease), transform 128ms var(--ease-bounce);
   pointer-events: none;
-  left: 155%;
-  top: 50%;
-  transform-origin: left;
-  transform: translateY(-50%) scale(0.97);
+  left: 50%;
+  top: calc(100% + 12px);
+  transform-origin: top;
+  transform: translateX(-50%) scale(0.97);
 }
 
 .switcheroo__popper:before {
@@ -886,13 +899,13 @@ summary {
   height: 16px;
   background-color: var(--contrast);
   z-index: -1;
-  left: -4px;
-  top: 50%;
-  transform: translateY(-50%) rotate(-45deg);
+  left: 50%;
+  top: -4px;
+  transform: translateX(-50%) rotate(45deg);
   border-radius: 2px;
 }
 
-.switcheroo__squircle:hover .switcheroo__popper { opacity: 1; transform: translateY(-50%) scale(1); }
+.switcheroo__squircle:hover .switcheroo__popper {   opacity: 1; transform: translateX(-50%) scale(1); }
 
 .switcheroo__logo, .switcheroo__divider { display: none; }
 
