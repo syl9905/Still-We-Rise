@@ -237,7 +237,7 @@ summary:focus-visible {
   display: block;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   overflow: hidden;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 /* ============================================================
