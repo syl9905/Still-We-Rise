@@ -142,7 +142,7 @@
    ============================================================ */
 [data-color-scheme="dark"] {
   color-scheme: dark;
-  --header: url('https://images2.imgbox.com/89/30/IXFzrs0y_o.png');
+  --header: url('https://i.ibb.co/p5sfc00/Still-We-Rise.png');
 
   --neutral:        #1c1c1a;
   --neutralDark:    #161614;
@@ -228,16 +228,16 @@ summary:focus-visible {
    BANNIERE
    ============================================================ */
 #header {
-  background-image: var(--header);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto;
-  width: 900px;
-  height: 330px;
-  display: block;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  overflow: hidden;
-  margin-top: 50px;
+    background-image: var(--header);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 900px;
+    height: 330px;
+    display: block;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    overflow: hidden;
+    margin-top: 20px;
 }
 
 /* ============================================================
