@@ -1185,7 +1185,7 @@ a.mainmenu img { display: none; }
   background-color: var(--neutralDarker);
   border: var(--borderMid);
   box-shadow: 3px 3px 0 var(--sleeveShadow);
-  filter: grayscale(1) contrast(1.05) brightness(0.92);
+  filter: grayscale(0) contrast(1.05) brightness(0.92);
 }
 
 /* Si .forum-img est un conteneur et non l'image elle-meme */
