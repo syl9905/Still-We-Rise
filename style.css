@@ -1553,11 +1553,16 @@ a.groups:last-child { margin-bottom: 0; }
   border: var(--border);
   border-bottom: none;
   border-radius: 0;
-  padding: 10px 14px;
+  padding: 12px 14px;
   margin-bottom: 0;
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 10px;
+  /* Passage en grille a 5 colonnes fixes */
+  display: grid;
+  grid-template-columns: 28px 36px minmax(0, 1fr) max-content 34px 160px;
+  grid-template-areas:
+    "num img infos stats ava last"
+    "num img desc  stats ava last";
+  column-gap: 12px;
+  row-gap: 4px;
   align-items: center;
   transition: background-color .2s, box-shadow .2s;
 }
@@ -1571,28 +1576,30 @@ a.groups:last-child { margin-bottom: 0; }
 .topicslist_row:last-child    { border-bottom: var(--border); border-radius: 0 0 var(--radius-lg) var(--radius-lg); margin-bottom: 0; }
 .topicslist_row:only-child    { border-radius: var(--radius-lg); border-bottom: var(--border); }
 
-/* Numero de piste avant chaque sujet : 01. 02. 03. */
+/* Numero de piste : 01. 02. 03. */
 .topicslist_row::before {
+  grid-area: num;
   content: counter(topic-counter, decimal-leading-zero) '.';
   font-family: var(--fontMono);
   font-size: 10px;
   color: var(--accentClr);
   letter-spacing: 0.05em;
-  flex-shrink: 0;
-  width: 28px;
   text-align: right;
 }
 
 .topicslist-img {
+  grid-area: img;
   width: 36px;
   height: 36px;
   background: var(--neutralDarker);
   border: var(--border);
   border-radius: var(--radius-sm);
-  flex-shrink: 0;
 }
 
-.topicslist_infos { flex: 1; min-width: 0; }
+.topicslist_infos {
+  grid-area: infos;
+  min-width: 0;
+}
 
 .topictitle {
   font-family: var(--font);
@@ -1618,22 +1625,23 @@ a.groups:last-child { margin-bottom: 0; }
 .topic_msgicon:empty { display: none; }
 
 .topicslist-stats {
+  grid-area: stats;
   text-align: right;
   font-family: var(--fontMono);
   font-size: var(--little-size);
   color: var(--contrastLighter);
-  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 /* Avatar du dernier message dans la liste */
 .topicslist-avatar-lastpost {
+  grid-area: ava;
   width: 34px;
   height: 34px;
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-sm);
   border: var(--border);
-  flex-shrink: 0;
 }
 
 .topicslist-avatar-lastpost img {
@@ -1652,12 +1660,22 @@ a.groups:last-child { margin-bottom: 0; }
   flex-shrink: 0;
 }
 
-.topicslist-lastpost a { color: var(--accentClr); font-size: var(--little-size); }
+.topicslist-lastpost {
+  grid-area: last;
+  width: 160px;
+  font-family: var(--fontMono);
+  font-size: var(--little-size);
+  color: var(--contrastLighter);
+}
 
+/* Description du sujet : se place proprement sous le titre */
 .topicslist-description {
+  grid-area: desc;
   border-top: var(--border);
-  padding-top: 6px;
+  padding-top: 5px;
+  margin-top: 2px;
   width: 100%;
+  font-family: var(--fontMono);
   font-size: var(--little-size);
   color: var(--contrastLighter);
 }
@@ -2563,7 +2581,7 @@ form[name="form_login"] .content {
   text-align: left;
 }
 
-/* Le forum convertit parfois les retours a la ligne du code en <br> :
+/* Le forum convertit parfois les retours a la ligne du code en br> :
    on les masque dans la structure, on les garde dans les textes */
 .fiche br { display: none; }
 .fiche-text br,
@@ -2595,7 +2613,7 @@ form[name="form_login"] .content {
 .fiche-name {
   padding-bottom: 12px;
   border-bottom: 1px solid var(--lineClr);
-  font-family: var(--font);
+  font-family: var(--fontTypewriter);
   font-size: 40px;
   font-weight: 700;
   line-height: 1.1;
@@ -2614,14 +2632,14 @@ form[name="form_login"] .content {
   color: var(--textColor);
 }
 
-/* ---------- Trigger warnings ---------- */
+/* ---------- Trigger warnings (cadre en trait plein) ---------- */
 .fiche-tw {
   display: flex;
   align-items: baseline;
   gap: 12px;
   margin: 18px 0 0;
   padding: 8px 14px;
-  border: 1px dashed var(--leader);
+  border: 1px solid var(--leader);
   border-radius: var(--radius-sm);
 }
 
@@ -2685,16 +2703,18 @@ form[name="form_login"] .content {
   box-shadow: 4px 4px 0 var(--sleeveShadow);
 }
 
+/* Avatar en couleurs (aucun filtre) */
 .fiche-avatar img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  filter: grayscale(1) contrast(1.08) brightness(0.95);
+  filter: none;
 }
 
-/* Grain vieille photo (meme effet que les avatars du forum) */
+/* Grain vieille photo : garde les couleurs, ajoute juste du relief.
+   Pour le retirer, supprime tout le bloc .fiche-avatar::after */
 .fiche-avatar::after {
   content: '';
   position: absolute;
@@ -2709,8 +2729,6 @@ form[name="form_login"] .content {
 }
 
 /* ---------- Titres de bloc : A1. Identite, A2. Histoire... ---------- */
-.fiche-box { min-width: 0; }
-
 .fiche-title {
   margin: 0 0 12px;
   font-family: var(--fontMono);
@@ -2723,19 +2741,28 @@ form[name="form_login"] .content {
 
 .fiche-title span { color: var(--accentClr); }
 
-/* ---------- Lignes cle / valeur (identite et hors jeu) ---------- */
-.fiche-rows { border-top: 1px dotted var(--leader); }
-
-.fiche-row {
+/* ---------- Lignes cle / valeur ----------
+   .fiche-rows est une grille a 2 colonnes : chaque .fiche-key et
+   chaque .fiche-val se range tout seul dans sa colonne. On peut donc
+   ajouter autant de lignes qu'on veut, les valeurs restent alignees. */
+/* ---------- Lignes cle / valeur (en pile sur toute la largeur) ---------- */
+.fiche-rows {
   display: grid;
-  grid-template-columns: 118px minmax(0, 1fr);
-  gap: 12px;
-  align-items: baseline;
-  padding: 8px 0;
-  border-bottom: 1px dotted var(--leader);
+  grid-template-columns: 1fr;
+  align-content: start;
+  border-top: 1px dotted var(--leader);
+}
+
+.fiche-row { display: contents; }
+
+.fiche-key,
+.fiche-val {
+  overflow-wrap: anywhere;
 }
 
 .fiche-key {
+  padding: 8px 0 2px;
+  border-bottom: none;
   font-family: var(--fontMono);
   font-size: 10px;
   letter-spacing: 0.08em;
@@ -2744,9 +2771,13 @@ form[name="form_login"] .content {
 }
 
 .fiche-val {
+  min-width: 0;
+  padding: 0 0 8px;
+  border-bottom: 1px dotted var(--leader);
   font-size: var(--medium-size);
   line-height: 1.45;
   color: var(--textColorAccent);
+  text-align: justify;
 }
 
 .fiche-val--small {
@@ -2754,14 +2785,55 @@ form[name="form_login"] .content {
   color: var(--contrastLighter);
 }
 
-/* Bloc hors jeu : cles plus longues */
-.fiche-rows--wide .fiche-row { grid-template-columns: 210px minmax(0, 1fr); }
+/* Bloc hors jeu : aligne sur le meme fonctionnement */
+.fiche-rows--wide { grid-template-columns: 1fr; }
+
+
+/* ---------- Bloc identite : defilable, jamais plus haut que l'avatar ---------- */
+.fiche-box {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 320px;
+}
+
+.fiche-box .fiche-title { flex-shrink: 0; }
+
+.fiche-box .fiche-rows {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 10px;
+  background-color: var(--neutralDark);
+  /* Ombres en haut / en bas : montrent qu'il y a une suite quand ca defile */
+  background-image:
+    linear-gradient(var(--neutralDark) 30%, transparent),
+    linear-gradient(transparent, var(--neutralDark) 70%),
+    radial-gradient(farthest-side at 50% 0, var(--leader), transparent),
+    radial-gradient(farthest-side at 50% 100%, var(--leader), transparent);
+  background-position: top, bottom, top, bottom;
+  background-size: 100% 28px, 100% 28px, 100% 10px, 100% 10px;
+  background-repeat: no-repeat;
+  background-attachment: local, local, scroll, scroll;
+}
 
 /* ---------- Sections ---------- */
 .fiche-section {
   margin-top: 30px;
   padding-top: 24px;
   border-top: 1px solid var(--lineClr);
+  max-height: 375px;
+  overflow: auto;
+  scrollbar-width: thin;
+   background-image:
+    linear-gradient(var(--neutralDark) 30%, transparent),
+    linear-gradient(transparent, var(--neutralDark) 70%),
+    radial-gradient(farthest-side at 50% 0, var(--leader), transparent),
+    radial-gradient(farthest-side at 50% 100%, var(--leader), transparent);
+  background-position: top, bottom, top, bottom;
+  background-size: 100% 28px, 100% 28px, 100% 10px, 100% 10px;
+  background-repeat: no-repeat;
+  background-attachment: local, local, scroll, scroll;
 }
 
 /* Histoire */
@@ -2769,9 +2841,10 @@ form[name="form_login"] .content {
   font-size: var(--medium-size);
   line-height: 1.75;
   color: var(--textColor);
+  text-align: justify;
 }
 
-/* Moodboard : 1 grande image + 5 petites */
+/* Moodboard : 1 grande image + 5 petites, en couleurs (N&B au survol) */
 .fiche-mood {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -2786,11 +2859,11 @@ form[name="form_login"] .content {
   height: 100%;
   object-fit: cover;
   border: var(--border);
-  filter: grayscale(0.9) contrast(1.05);
   transition: filter .3s;
+  filter: none;
 }
 
-.fiche-mood img:hover { filter: grayscale(0); }
+.fiche-mood img:hover { filter: grayscale(1) contrast(1.05); }
 
 .fiche-mood img:first-child { grid-column: span 2; grid-row: span 2; }
 
@@ -2802,8 +2875,10 @@ form[name="form_login"] .content {
 @media (max-width: 720px) {
   .fiche-main { grid-template-columns: 1fr; }
   .fiche-sleeve { margin: 0 auto; }
-  .fiche-row,
-  .fiche-rows--wide .fiche-row { grid-template-columns: 1fr; gap: 2px; }
+  .fiche-rows,
+  .fiche-rows--wide { grid-template-columns: 1fr; }
+  .fiche-key { padding: 8px 0 0; border-bottom: none; }
+  .fiche-val { padding-top: 2px; }
   .fiche-name { font-size: 30px; }
 }
 
