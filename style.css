@@ -104,7 +104,7 @@
   --title-size:     20px;
 
   /* Polices : serif pour lire, mono pour les micro-infos */
-  --font:           'Source Serif 4', Georgia, serif;
+  --font:           'Open Sans';
   --font2:          'Source Serif 4', Georgia, serif;
   --fontMono:       'DM Mono', 'Courier New', monospace;
   --fontDisplay:    'Bebas Neue', Impact, sans-serif;
@@ -1261,7 +1261,7 @@ a.forumtitle:hover {
   overflow-y: auto;
   scrollbar-width: thin;
   font-family: var(--font);
-  font-size: 13.5px;
+  font-size: 12px;
   line-height: 1.6;
   letter-spacing: 0.005em;
   color: var(--textColor);
