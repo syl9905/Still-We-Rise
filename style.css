@@ -643,7 +643,8 @@ summary {
   width: var(--menuSize);
   position: fixed;
   z-index: 98;
-  top: 56px;                    /* le panneau s'ouvre sous la barre */
+  top: 56px;
+  right: calc(var(--menuSize) * -1);
   height: calc(100% - 56px);
   padding-top: 20px;
   display: flex;
