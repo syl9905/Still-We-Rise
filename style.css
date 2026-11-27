@@ -1590,7 +1590,7 @@ a.big:last-child, a.glue:last-child, a.grace:last-child {
   margin-bottom: 0;
   /* Passage en grille a 5 colonnes fixes */
   display: grid;
-  grid-template-columns: 28px 36px minmax(0, 1fr) max-content 34px 160px;
+  grid-template-columns: 28px 0px minmax(0, 1fr) max-content 34px 160px;
   grid-template-areas:
     "num img infos stats ava last"
     "num img desc  stats ava last";
@@ -1699,6 +1699,16 @@ a.big:last-child, a.glue:last-child, a.grace:last-child {
   font-family: var(--fontMono);
   font-size: var(--little-size);
   color: var(--contrastLighter);
+}
+
+/* Supprime l'espace excessif des sauts de ligne br> s'il y en a */
+.topicslist-lastpost br {
+  display: none;
+}
+
+/* Annule d'éventuelles marges sur les éléments enfants */
+.topicslist-lastpost > * {
+  margin: 0 !important;
 }
 
 /* Description du sujet : se place proprement sous le titre */
