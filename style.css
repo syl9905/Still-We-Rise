@@ -1622,7 +1622,7 @@ a.big:last-child, a.glue:last-child, a.grace:last-child {
 
 .topicslist-img {
   grid-area: img;
-  width: 36px;
+  width: 0px;
   height: 36px;
   background: var(--neutralDarker);
   border: var(--border);
