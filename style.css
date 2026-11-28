@@ -1637,7 +1637,7 @@ a.big:last-child, a.glue:last-child, a.grace:last-child {
 .topictitle {
   font-family: var(--font);
   font-size: var(--medium-size);
-  font-weight: 600;
+  font-weight: lighter;
   color: var(--textColorAccent);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1653,6 +1653,11 @@ a.big:last-child, a.glue:last-child, a.grace:last-child {
 }
 
 .topictitle:hover { color: var(--accentClr); text-decoration-color: var(--accentClr); }
+
+.topic-author: {     
+   font-family: var(--fontMono);
+   font-size: var(--little-size);
+}
 
 .topic_msgicon { margin-right: 4px; }
 .topic_msgicon:empty { display: none; }
@@ -1673,7 +1678,7 @@ a.big:last-child, a.glue:last-child, a.grace:last-child {
   height: 34px;
   position: relative;
   overflow: hidden;
-  border-radius: var(--radius-sm);
+  border-radius: 100%;
   border: var(--border);
 }
 
