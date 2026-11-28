@@ -1635,8 +1635,9 @@ a.big:last-child, a.glue:last-child, a.grace:last-child {
 }
 
 .topictitle {
-  font-family: var(--font);
-  font-size: var(--medium-size);
+  font-family: var(--fontMono);
+  font-size: 12px;
+  text-transform: uppercase;
   font-weight: lighter;
   color: var(--textColorAccent);
   overflow: hidden;
@@ -1723,9 +1724,22 @@ a.big:last-child, a.glue:last-child, a.grace:last-child {
   padding-top: 5px;
   margin-top: 2px;
   width: 100%;
-  font-family: var(--fontMono);
+  font-family: var(--font);
+  font-style: italic;
   font-size: var(--little-size);
   color: var(--contrastLighter);
+}
+
+.topic-type {
+   padding: 0 7px;
+   font-family: var(--fontMono);
+   font-size: var(--little-size);
+   letter-spacing: 0.08em;
+   text-transform: uppercase;
+   white-space: nowrap;
+   color: var(--accentClr);
+   border: 1px solid var(--accentClr);
+   border-radius: 20px;
 }
 
 .topic_separator { height: 1px; background: var(--borderMid); margin: 6px 0; }
