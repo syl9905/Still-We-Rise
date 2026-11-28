@@ -1623,7 +1623,7 @@ a.big:last-child, a.glue:last-child, a.grace:last-child {
 .topicslist-img {
   grid-area: img;
   width: 0px;
-  height: 36px;
+  height: 100%;
   background: var(--neutralDarker);
   border: var(--border);
   border-radius: var(--radius-sm);
