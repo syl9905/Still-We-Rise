@@ -1731,15 +1731,13 @@ a.big:last-child, a.glue:last-child, a.grace:last-child {
 }
 
 .topic-type {
-   padding: 0 7px;
+   padding: 0;
    font-family: var(--fontMono);
    font-size: var(--little-size);
    letter-spacing: 0.08em;
    text-transform: uppercase;
    white-space: nowrap;
    color: var(--accentClr);
-   border: 1px solid var(--accentClr);
-   border-radius: 20px;
 }
 
 .topic_separator { height: 1px; background: var(--borderMid); margin: 6px 0; }
